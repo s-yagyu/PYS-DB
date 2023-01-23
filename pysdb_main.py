@@ -34,7 +34,7 @@ __author__ = 'Shinjiro Yagyu'
 __email__ = 'yagyu.shinjiro@gmail.com'
 __version__ = '2.0'
 __license__ = '3BSD'
-__date__= "01 Jan 2023"
+__date__= "23 Jan 2023"
 
 
 import json
@@ -65,8 +65,8 @@ from dbconv import sampleMetaConv as smc
 
 
 # JSON  Data list 
-BASIC = Path(r'Basic')
-ADVANCE = Path(r'advance')
+BASIC = Path(r'./Basic')
+ADVANCE = Path(r'./Advance')
 
 @st.cache #１度呼ばれたらそれ以降は呼ばれても無視される。
 def marge_data_list(basic, advance):
