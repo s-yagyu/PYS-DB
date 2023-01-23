@@ -6,8 +6,8 @@ https://s-yagyu-pys-db-pysdb-main-1ephtr.streamlit.app/
 
 ### Introduction
 
-このデータベースは、NIMSリポジトリ(MDR)に登録されているPYS(光電子収量分光)データ（２次利用が可能なライセンス付与されたもの）を収集し、メタデータの抽出を行いこのリポジトリに構築したものです。
-データの利用に関しては、クリエーティブコモンズのCC-BYのライセンスが付与されてるため、原作者の表示を行っていただければ２次利用は可能です。
+このデータベースは、NIMSリポジトリ(MDR)に登録されているPYS(光電子収量分光)データ（2次利用が可能なライセンス付与されたもの）を収集し、メタデータの抽出を行いこのリポジトリに構築したものです。
+データの利用に関しては、クリエーティブコモンズのCC-BYのライセンスが付与されてるため、原作者の表示を行っていただければ2次利用は可能です。
 このデータベースの詳細は、こちらの論文を参照していただければと思います。
 
 検索アプリは、Streamlit cloud（Comunity版）を用いて提供されています。
@@ -15,12 +15,14 @@ https://s-yagyu-pys-db-pysdb-main-1ephtr.streamlit.app/
 データベースは、各測定シリーズごと（MDRでの登録データ単位）ごとにJSONファイルで情報が抽出されて格納されています。
 JSONファイルを直接ダウンロードして編集検索することも可能です。
 
-
+ MDR(Materials Data Repository) https://mdr.nims.go.jp/
+ 
 ### 収録データ
 
 収録データは2つに分かれています。
-基本的な材料データ(Basic)：NIMSの研究者が、基本的材料を選び出し収集したものです。
-論文材料データ(Advance):論文発表された新規に開発された材料です。
+
+- 基本的な材料データ(Basic)：NIMSの研究者が、基本的材料を選び出し収集したものです。
+- 論文材料データ(Advance):論文発表された新規に開発された材料です。
 
 検索に際しては、BasicとAdvanceまたはその両方で検索することができます。
 
@@ -64,6 +66,10 @@ https://s-yagyu-pys-db-pysdb-main-1ephtr.streamlit.app/
  'yslice', 'bg', 'file_name'
 
 Note: キーの内容の詳細は、こちらのリポジトリまたは論文を参照してください。
+
+S. Yagyu: Journal of Surface Analysis. 29 [2] (2022) 97-110.
+
+https://github.com/s-yagyu/ACdataConverter
 
  #### mol metadata
 
