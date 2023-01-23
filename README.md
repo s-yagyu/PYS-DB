@@ -50,6 +50,7 @@ https://s-yagyu-pys-db-pysdb-main-1ephtr.streamlit.app/
 ![db01](./figs/db01.PNG)
 
 ![db02](./figs/db02.PNG)
+
 ### DataBase metadata
 
 データベースのメタデータキーは以下の通りです。
@@ -67,9 +68,8 @@ https://s-yagyu-pys-db-pysdb-main-1ephtr.streamlit.app/
 
 Note: キーの内容の詳細は、こちらのリポジトリまたは論文を参照してください。
 
-S. Yagyu: Journal of Surface Analysis. 29 [2] (2022) 97-110.
-
-https://github.com/s-yagyu/ACdataConverter
+- S. Yagyu: Journal of Surface Analysis. 29 [2] (2022) 97-110.
+- https://github.com/s-yagyu/ACdataConverter
 
  #### mol metadata
 
@@ -77,7 +77,7 @@ https://github.com/s-yagyu/ACdataConverter
 
 Note: smiles -> isomeric Smile
 
- ### excel metadata
+ #### excel metadata
 'dataLicense', 'datasetTitle', 'dataProvider', 'providerOrganization',
 'inputDate', 'aim', 'webReference', 'attachedReference', 'sampleLavel',
 'generalName', 'sampleAbbreviation', 'sampleDescription',
