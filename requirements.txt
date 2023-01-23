@@ -1,0 +1,5 @@
+matplotlib
+openpyxl
+rdkit
+streamlit
+streamlit-aggrid
