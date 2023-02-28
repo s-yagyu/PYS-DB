@@ -103,15 +103,9 @@ def marge_files(folderPath, outpath=None):
 if __name__ == '__main__':
     
     pass
-    # folder_path =Path(r"C:\Users\me\\Desktop\Yanagida20221001")
+    # folder_path =Path(r"")
     # md,mdf = marge_files(folder_path, outpath=r'Advance')
 
 
-    # folder_path =Path(r"C:\Users\me\Desktop\OLED20220829")
+    # folder_path =Path(r"")
     # md,mdf = marge_files(folder_path, outpath=r'Basic')
-
-   
-    # folder_path =Path(r"C:\Users\me\Desktop\OLED20220803")
-    # md,mdf = marge_files(folder_path, outpath=r'Basic')
-   
-    # print(mdf.columns)
