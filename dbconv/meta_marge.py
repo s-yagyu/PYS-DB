@@ -1,10 +1,22 @@
-""" make Json file
+""" 
+MDRの登録単位は論文ごと
+・同じ論文に使われているデータは1つのフォルダーにまとめる。
+・フォルダー名は、Excelファイルから拡張子を取ったものと同じ
+（著者名_記入月_記入年, 例:Yagyu_09_2022)
+・Example
+    Yagyu_09_2022
+        |-Yagyu_09_2022.xlsx
+        |-AAA.dat
+        |-BBB.dat
+        |-CCC.dat
+        |-aaa.mol
+        |-bbb.mol
+        |-abc.pdf
+        |-def.csv
+        |-ghi.xlsx
 
-MDRの登録単位はFolder
-Folderの名前は、一意にする。フォルダー名に必ず登録の日付を付け加える(YMD)
-ex) OLED -> OLED_20230118 または　OLED20230118
-
-ListypeのJSONファイルを作成。ファイル名は、Folder名.jsonとする
+このプログラムは、MDRに登録されたデータ（フォルダー単位）から検索メタデータを作成する。  
+List-TypeのJSONファイルを作成。ファイル名は、Folder名.json。
 
 """
 from pathlib import Path
@@ -26,7 +38,7 @@ def marge_files(folderPath, outpath=None):
         研究開発用のフォルダー、と基本材料のフォルダーとに分ける
 
     Returns:
-        marge_dict, marge_df
+        marge_dict, marge_df, str(out_json_full_path)
     """
     
     folder_path = Path(folderPath)
@@ -82,11 +94,11 @@ def marge_files(folderPath, outpath=None):
         out_json_full_path = out_path / out_json_name
         marge_df.to_json(str(out_json_full_path),date_format='iso',orient='records')   
         print(f'Output Json file: {str(out_json_full_path)}')    
-        return marge_dict, marge_df
+        return marge_dict, marge_df, str(out_json_full_path)
 
     except:
         print('error! check excel file')
-        return "", ""
+        return "", "",""
     
 if __name__ == '__main__':
     
