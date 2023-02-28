@@ -16,7 +16,8 @@ https://s-yagyu-pys-db-pysdb-main-1ephtr.streamlit.app/
 JSONファイルを直接ダウンロードして編集検索することも可能です。
 
 S. Yagyu et. al: Journal of Surface Analysis. 29 [3] (2023) 146-154.
- MDR(Materials Data Repository) https://mdr.nims.go.jp/
+
+MDR(Materials Data Repository) https://mdr.nims.go.jp/
  
 ### 収録データ
 
