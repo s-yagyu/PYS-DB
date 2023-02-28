@@ -8,7 +8,6 @@ rdkit, (pubchempy)
 
 """
 __author__ = 'Shinjiro Yagyu'
-__email__ = 'yagyu.shinjiro@gmail.com'
 __version__ = '1.0'
 __license__ = 'BSD-3'
 __date__= "22 Aug 2022"
@@ -105,7 +104,7 @@ def smiles2mol(smiles_,draw=True,save=False,save_name=None):
         
 
 if __name__ == '__main__':
-    # mol_file_path = r'C:\Users\me\Desktop\4MeOPEPTC.mol'
+    # mol_file_path = r'./4MeOPEPTC.mol'
     # a,b = mol2meta(mol_file_path,mol_name=None,printf=False,size=(300,300))
     # print(a)
     pass
