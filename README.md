@@ -15,6 +15,7 @@ https://s-yagyu-pys-db-pysdb-main-1ephtr.streamlit.app/
 データベースは、各測定シリーズごと（MDRでの登録データ単位）ごとにJSONファイルで情報が抽出されて格納されています。
 JSONファイルを直接ダウンロードして編集検索することも可能です。
 
+S. Yagyu et. al: Journal of Surface Analysis. 29 [3] (2023) 146-154.
  MDR(Materials Data Repository) https://mdr.nims.go.jp/
  
 ### 収録データ
