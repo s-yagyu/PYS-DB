@@ -1,7 +1,12 @@
 """
 Read excel include meta data and convert json file
 
+20230313
+CSVの処理を追加
+
+
 """
+from abc import ABCMeta, abstractmethod
 from datetime import date, datetime
 import json
 from pathlib import Path
@@ -11,86 +16,50 @@ import pandas as pd
 import toml
 
 
-def json_serial(obj):
-    """
-    exampel
-    # datetime型を含むdict
-    item = { "dt" : datetime.now() }
+# Metadata KEY
 
-    # default引数を指定して、JSON文字列を生成
-    jsonstr = json.dumps(item, default=json_serial)
-    
-    print(jsonstr) # '{"dt": "2017-07-05T17:01:06.112224"}'
-    
-    """
-    if isinstance(obj, (datetime, date)):
-        return obj.isoformat()
-    
-    else:
-        return str(obj)
-    
-    # raise TypeError (f'Type {obj} not serializable')
+KEYS = ["dataLicense",
+        "datasetTitle",
+        "dataProvider",	
+        "providerOrganization",
+        "inputDate",
+        "aim",
+        "webReference",
+        "attachedReference",
+        "sampleLavel",
+        "generalName",
+        "sampleAbbreviation",
+        "sampleDescription",
+        "chemicalFormula",
+        "substrateName",
+        "sampleShape",
+        "datFileName",
+        "molFileName",
+        "samplePreparation",
+        "comment"]
 
-def json2toml(jfile, save=False):
-    """Read json file -> convert toml format
 
-    Args:
-        jfile (str or pathlib: file name
-        save (bool, optional): save toml. Defaults to False.
+class ReadSampleMeta(metaclass=ABCMeta):
+    @abstractmethod
+    def convert(self):
+        pass  
 
-    Returns:
-        dict, toml format
+class ReadCSVSampleMeta(ReadSampleMeta):
+    
+    def __init__(self,filename):
+        self.filename = filename
+        self.file_name = Path(filename)
         
-    Example:
-        JSON->Toml
-        fn=r'validationData\AC3_off.json'
-        jd,tm = json2toml(jfile=fn, save=True)
-    """
-    jpath = Path(jfile)
-    with open(jpath) as file:
-        # json to dict
-        dict_obj = json.load(file)
-        # dict to toml
-        tm = toml.dumps(dict_obj)
-        # print(tm)
-        
-        if save:
-            with open(jpath.with_suffix('.toml'),'w') as f:
-                toml.dump(dict_obj,f)
-        
-    return dict_obj, tm
+    def convert(self):
+        df_ = pd.read_csv(self.file_name)
+        # Sheetに入力されている0をBlankにする。　記入されていないレコードを削除
+        self.df  = df_.replace(0, '').dropna(how='all')
+        df_json=self.df.to_json(orient='records',force_ascii=False)
+        self.data_dict_records = json.loads(df_json)
 
-def toml2json(tfile, save=False):
-    """Read toml file -> convert json format
-
-    Args:
-        tfile (str or pathlib): file name
-        save (bool, optional): save json. Defaults to False.
-
-    Returns:
-        dict, json
+#----- Not Used
     
-    Examples:
-        Toml-> JSON
-        fn2=r'validationData\AC3_off.toml'
-        jd,js = toml2json(tfile=fn2, save=True)
-    """
-    tpath = Path(tfile)
-    with open(tpath) as file:
-        # toml to dict
-        dict_obj = toml.load(file)
-        # dict to toml
-        js = json.dumps(dict_obj)
-        # print(js)
-        
-        if save:
-            with open(tpath.with_suffix('.json'),'w') as f:
-                json.dump(dict_obj ,f, indent=4)
-        
-    return dict_obj, js
-
-    
-class ReadExcelSampleMeta():
+class ReadExcelSampleMeta(ReadSampleMeta):
     """read sample metadata excel sheet and then out metadata
     
     Input Excel data
@@ -118,28 +87,11 @@ class ReadExcelSampleMeta():
    
     """
   
-    keys_j = ["dataLicense",
-                "datasetTitle",
-                "dataProvider",	
-                "providerOrganization",
-                "inputDate",
-                "aim",
-                "webReference",
-                "attachedReference",
-                "sampleLavel",
-                "generalName",
-                "sampleAbbreviation",
-                "sampleDescription",
-                "chemicalFormula",
-                "substrateName",
-                "sampleShape",
-                "datFileName",
-                "molFileName",
-                "comment"]
+    keys_j = KEYS
 
-    keys_e = keys_j
+    keys_e = KEYS
     
-    SHEET_NAME = "記入用Sheet2"
+    SHEET_NAME = "Sheet2"
     
     def __init__(self,filename):
         self.filename = filename
@@ -348,21 +300,106 @@ class ReadExcelSampleMeta():
         
         return json_meta
     
+
+
+def json_serial(obj):
+    """
+    exampel
+    # datetime型を含むdict
+    item = { "dt" : datetime.now() }
+
+    # default引数を指定して、JSON文字列を生成
+    jsonstr = json.dumps(item, default=json_serial)
     
-# if __name__ == '__main__':
+    print(jsonstr) # '{"dt": "2017-07-05T17:01:06.112224"}'
+    
+    """
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    
+    else:
+        return str(obj)
+    
+    # raise TypeError (f'Type {obj} not serializable')
+
+def json2toml(jfile, save=False):
+    """Read json file -> convert toml format
+
+    Args:
+        jfile (str or pathlib: file name
+        save (bool, optional): save toml. Defaults to False.
+
+    Returns:
+        dict, toml format
+        
+    Example:
+        JSON->Toml
+        fn=r'validationData\AC3_off.json'
+        jd,tm = json2toml(jfile=fn, save=True)
+    """
+    jpath = Path(jfile)
+    with open(jpath) as file:
+        # json to dict
+        dict_obj = json.load(file)
+        # dict to toml
+        tm = toml.dumps(dict_obj)
+        # print(tm)
+        
+        if save:
+            with open(jpath.with_suffix('.toml'),'w') as f:
+                toml.dump(dict_obj,f)
+        
+    return dict_obj, tm
+
+def toml2json(tfile, save=False):
+    """Read toml file -> convert json format
+
+    Args:
+        tfile (str or pathlib): file name
+        save (bool, optional): save json. Defaults to False.
+
+    Returns:
+        dict, json
+    
+    Examples:
+        Toml-> JSON
+        fn2=r'validationData\AC3_off.toml'
+        jd,js = toml2json(tfile=fn2, save=True)
+    """
+    tpath = Path(tfile)
+    with open(tpath) as file:
+        # toml to dict
+        dict_obj = toml.load(file)
+        # dict to toml
+        js = json.dumps(dict_obj)
+        # print(js)
+        
+        if save:
+            with open(tpath.with_suffix('.json'),'w') as f:
+                json.dump(dict_obj ,f, indent=4)
+        
+    return dict_obj, js
+
+   
+if __name__ == '__main__':
     # pass
     
-    # file_path= r""
+    file_path= r"C:\Users\yagyu\Desktop\Wakahara_02_2023"
+    # CSV version
+    base01 = ReadCSVSampleMeta(file_path)
+    base01.convert()
+    sample_dict = base01.data_dict_records
+    print(sample_dict)
+    print(type(sample_dict))
+
+    
+    # Excel version
     # base01 = ReadExcelSampleMeta(file_path)
     # # print(base01.find_sheetname())
 
     # base01.convert()
-    # # print(base01.data_dict)
-
     # sample_dict = base01.data_dict_records
     # print(sample_dict)
-    # # save each json file
-    # # base01.each_json_out()
     
 
     
