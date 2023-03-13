@@ -79,12 +79,12 @@ Note: キーの内容の詳細は、こちらのリポジトリまたは論文�
 
 Note: smiles -> isomeric Smile
 
- #### excel metadata
+ #### csv metadata
 'dataLicense', 'datasetTitle', 'dataProvider', 'providerOrganization',
 'inputDate', 'aim', 'webReference', 'attachedReference', 'sampleLavel',
 'generalName', 'sampleAbbreviation', 'sampleDescription',
 'chemicalFormula', 'substrateName', 'sampleShape', 'datFileName',
-'molFileName', 'comment'
+'molFileName', 'samplePreparation', 'comment'
 
 #### All metadata (json file)
 'dataLicense', 'datasetTitle', 'dataProvider', 'providerOrganization',
