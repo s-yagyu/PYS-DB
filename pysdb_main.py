@@ -31,10 +31,10 @@ Stop:
 """
 
 __author__ = 'Shinjiro Yagyu'
-__email__ = 'yagyu.shinjiro@gmail.com'
-__version__ = '2.0'
+__version__ = '2.1'
 __license__ = '3BSD'
 __date__= "23 Jan 2023"
+__update__= "14 Apr 2023"
 
 
 import json
@@ -68,7 +68,9 @@ from dbconv import sampleMetaConv as smc
 BASIC = Path(r'./Basic')
 ADVANCE = Path(r'./Advance')
 
-@st.cache #１度呼ばれたらそれ以降は呼ばれても無視される。
+# @st.cache_data # Versin依存
+#１度呼ばれたらそれ以降は呼ばれても無視される。
+@st.cache 
 def marge_data_list(basic, advance):
     
     def read_marge_json(path):
