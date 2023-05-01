@@ -18,6 +18,8 @@ JSONファイルを直接ダウンロードして編集検索することも可�
 [1] MDR(Materials Data Repository) https://mdr.nims.go.jp/
 
 [2] S. Yagyu et. al: Journal of Surface Analysis. 29 [3] (2023) 146-154.
+
+https://mdr.nims.go.jp/concern/publications/7h149t569
  
 ### 収録データ
 
