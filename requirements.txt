@@ -1,6 +1,6 @@
+streamlit
+streamlit-aggrid
 pandas
 matplotlib
 openpyxl
 rdkit
-streamlit
-streamlit-aggrid
