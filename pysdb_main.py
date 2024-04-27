@@ -68,9 +68,10 @@ from dbconv import sampleMetaConv as smc
 BASIC = Path(r'./Basic')
 ADVANCE = Path(r'./Advance')
 
-# @st.cache_data # Versin依存
+# @st.cache_data # Version依存
 #１度呼ばれたらそれ以降は呼ばれても無視される。
-@st.cache 
+# @st.cache 
+@st.cache_data
 def marge_data_list(basic, advance):
     
     def read_marge_json(path):
